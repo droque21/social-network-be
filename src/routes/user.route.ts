@@ -5,9 +5,29 @@ import { UserCreateController } from '../controller/user-create.controller';
 
 export const register = (router: Router) => {
   const reqSchema = [
-    body('id').exists().isString(),
-    body('name').exists().isString(),
-    body('duration').exists().isString()
+    body('id')
+      .exists()
+      .withMessage('id is required')
+      .bail()
+      .isString()
+      .withMessage('id must be a string'),
+    body('firstName').exists()
+      .withMessage('firstName is required')
+      .bail()
+      .isString()
+      .withMessage('firstName must be a string'),
+    body('lastName')
+      .exists()
+      .withMessage('lastName is required')
+      .bail()
+      .isString()
+      .withMessage('lastName must be a string'),
+    body('username')
+      .exists()
+      .withMessage('username is required')
+      .bail()
+      .isString()
+      .withMessage('username must be a string'),
   ];
 
   const userCreateController = new UserCreateController();

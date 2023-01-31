@@ -7,6 +7,7 @@ import httpStatus from 'http-status';
 import { registerRoutes } from './routes';
 import cors from 'cors';
 import Router from 'express-promise-router';
+import mongoose from 'mongoose';
 
 export class Server {
   private express: express.Express;
@@ -36,6 +37,7 @@ export class Server {
   }
 
   async listen(): Promise<void> {
+
     return new Promise(resolve => {
       this.httpServer = this.express.listen(this.port, () => {
         console.info(
