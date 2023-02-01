@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { AuthLoginController } from '../controller/auth-login.controller';
+import { AuthLoginController } from '../auth/infrastructure/auth-login.controller';
 import { stringValidation } from '../shared/infrastructure/validations/strings.validation';
 import { validateReqSchema } from './index';
 

@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
-import { JsonWebToken } from "../shared/infrastructure/jsonWebToken/jsonWebToken";
-import { PasswordEncrypter } from "../shared/infrastructure/passwordEncrypter/passwordEncrypter";
-import { UserMongoRepository } from "../user/infrastructure/userMongo.repository";
+import { Controller } from "../../shared/infrastructure/controller/controller";
+import { JsonWebToken } from "../../shared/infrastructure/jsonWebToken/jsonWebToken";
+import { PasswordEncrypter } from "../../shared/infrastructure/passwordEncrypter/passwordEncrypter";
+import { UserMongoRepository } from "../../user/infrastructure/userMongo.repository";
 
 interface RequestLogin extends Request {
   body: {
@@ -10,7 +11,7 @@ interface RequestLogin extends Request {
   };
 }
 
-export class AuthLoginController {
+export class AuthLoginController implements Controller {
   constructor(
   ) { }
 
@@ -35,6 +36,6 @@ export class AuthLoginController {
 
     const auth = jsonWebToken.encrypt(user.id);
 
-    return res.json({ result: auth })
+    res.json({ result: auth })
   }
 }
