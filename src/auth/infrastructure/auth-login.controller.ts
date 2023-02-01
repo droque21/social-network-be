@@ -22,14 +22,14 @@ export class AuthLoginController implements Controller {
     const user = await userRepository.findUserByUsername(username);
 
     if (!user) {
-      throw new Error('User or password incorrect');
+      throw new Error('Username or password incorrect');
     }
 
     const passwordEncrypter = new PasswordEncrypter();
     const passwordValid = await passwordEncrypter.compare(password, user.password);
 
     if (!passwordValid) {
-      throw new Error('User or password incorrect');
+      throw new Error('Username or password incorrect');
     }
 
     const jsonWebToken = new JsonWebToken();
