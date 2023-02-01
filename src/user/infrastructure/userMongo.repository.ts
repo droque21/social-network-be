@@ -27,7 +27,6 @@ export class UserMongoRepository implements UserRepository {
   }
 
   async createUser(user: User) {
-    console.log(user)
     const userCreated = UserModel.build(user);
     await userCreated.save();
 
