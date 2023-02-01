@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { JsonWebToken } from "../shared/infrastructure/jsonWebToken/jsonWebToken";
 import { PasswordEncrypter } from "../shared/infrastructure/passwordEncrypter/passwordEncrypter";
 import { UserMongoRepository } from "../user/infrastructure/userMongo.repository";
 
@@ -30,6 +31,10 @@ export class AuthLoginController {
       throw new Error('User or password incorrect');
     }
 
-    return res.json({ "message": "ok" })
+    const jsonWebToken = new JsonWebToken();
+
+    const auth = jsonWebToken.encrypt(user.id);
+
+    return res.json({ result: auth })
   }
 }

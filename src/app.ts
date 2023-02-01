@@ -12,6 +12,9 @@ export class App {
     if (!process.env.MONGO_URI) {
       throw new Error("MONGO_URI must be defined")
     }
+    if (!process.env.JWT_SECRET) {
+      throw new Error("JWT_SECRET must be defined")
+    }
 
     await mongoose.connect(process.env.MONGO_URI!);
     console.log("Connected to MongoDB")
