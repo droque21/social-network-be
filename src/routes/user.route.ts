@@ -3,31 +3,20 @@ import { body } from 'express-validator';
 import { validateReqSchema } from './index';
 import { UserCreateController } from '../controller/user-create.controller';
 import { idValidation } from '../shared/infrastructure/validations/id.validation';
+import { emailValidation, passwordValidation, stringValidation } from '../shared/infrastructure/validations/strings.validation';
+
 
 export const register = (router: Router) => {
   const reqSchema = [
     idValidation,
-    body('firstName').exists()
-      .withMessage('firstName is required')
-      .bail()
-      .isString()
-      .withMessage('firstName must be a string'),
-    body('lastName')
-      .exists()
-      .withMessage('lastName is required')
-      .bail()
-      .isString()
-      .withMessage('lastName must be a string'),
-    body('username')
-      .exists()
-      .withMessage('username is required')
-      .bail()
-      .isString()
-      .withMessage('username must be a string'),
+    stringValidation('firstName'),
+    stringValidation('lastName'),
+    stringValidation('username'),
+    passwordValidation,
+    emailValidation
   ];
 
   const userCreateController = new UserCreateController();
-  router.put('/courses/:id', reqSchema, validateReqSchema, (req: Request, res: Response) =>
-    userCreateController.run(req, res)
-  );
+
+  router.post('/user', reqSchema, validateReqSchema, userCreateController.run);
 };

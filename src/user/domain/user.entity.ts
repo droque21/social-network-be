@@ -2,6 +2,8 @@
 export class User {
   readonly id: string;
   readonly username: string;
+  readonly password: string;
+  readonly email: string;
   readonly firstName: string;
   readonly lastName: string;
   readonly createdAt: number;
@@ -10,6 +12,8 @@ export class User {
   constructor(user: {
     id: string;
     username: string;
+    password: string;
+    email: string;
     firstName: string;
     lastName: string;
     createdAt: number;
@@ -17,11 +21,11 @@ export class User {
   }) {
     this.id = user.id;
     this.username = user.username;
+    this.password = user.password;
+    this.email = user.email;
     this.firstName = user.firstName;
     this.lastName = user.lastName;
-
-    this.createdAt = user.createdAt || Date.now();
-    this.updatedAt = user.updatedAt || Date.now();
-
+    this.createdAt = user.createdAt;
+    this.updatedAt = user.updatedAt;
   }
 }

@@ -12,6 +12,7 @@ const userSchema = new mongoose.Schema(
 		id: {
 			type: String,
 			required: true,
+			index: true,
 		},
 		firstName: {
 			type: String,
@@ -24,6 +25,21 @@ const userSchema = new mongoose.Schema(
 		username: {
 			type: String,
 			required: true,
+			index: true,
+		},
+		password: {
+			type: String,
+			required: true,
+		},
+		email: {
+			type: String,
+			required: true,
+			index: true,
+		},
+		isActive: {
+			type: Boolean,
+			required: true,
+			default: true,
 		},
 		createdAt: {
 			type: Number,
@@ -37,6 +53,9 @@ const userSchema = new mongoose.Schema(
 	{
 		toJSON: {
 			transform(doc, ret) {
+				delete ret._id;
+				delete ret.__v;
+				delete ret.isActive;
 			},
 		},
 	}
@@ -44,14 +63,7 @@ const userSchema = new mongoose.Schema(
 
 
 userSchema.statics.build = (user: User) => {
-	return new UserModel({
-		id: user.id,
-		firstName: user.firstName,
-		lastName: user.lastName,
-		username: user.username,
-		createdAt: user.createdAt,
-		updatedAt: user.updatedAt,
-	});
+	return new UserModel(user);
 }
 
 export const UserModel = mongoose.model<UserDoc, UserModel>("User", userSchema);
