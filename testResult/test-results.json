@@ -8,7 +8,7 @@
   "numFailedTests": 0,
   "numPendingTests": 0,
   "numTodoTests": 0,
-  "startTime": 1676152329347,
+  "startTime": 1676152728744,
   "success": true,
   "testResults": [
     {
@@ -16,20 +16,20 @@
         {
           "ancestorTitles": [
             "",
-            "user"
+            "Create User"
           ],
-          "fullName": " user should return the user",
+          "fullName": " Create User should have a route /user with method post",
           "status": "passed",
-          "title": "should return the user",
-          "duration": 18,
+          "title": "should have a route /user with method post",
+          "duration": 29,
           "failureMessages": []
         }
       ],
-      "startTime": 1676152594263,
-      "endTime": 1676152594281,
+      "startTime": 1676153027898,
+      "endTime": 1676153027927,
       "status": "passed",
       "message": "",
-      "name": "/home/luisroque/Documents/my-projects/social-network-be/src/routes/test/user.test.ts"
+      "name": "/home/luisroque/Documents/my-projects/social-network-be/src/routes/test/user/create.test.ts"
     }
   ]
 }
