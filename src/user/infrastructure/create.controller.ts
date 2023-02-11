@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import httpStatus from 'http-status';
 import { PasswordEncrypter } from '../../shared/infrastructure/passwordEncrypter/passwordEncrypter';
-import { UserCreator } from '../application/create-user.use-case';
+import { UserCreator } from '../application/create.use-case';
 import { User } from '../domain/user.entity';
 import { UserMongoRepository } from './userMongo.repository';
 import { Controller } from '../../shared/infrastructure/controller/controller';

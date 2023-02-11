@@ -26,7 +26,7 @@ export class AuthLoginController implements Controller {
     }
 
     const passwordEncrypter = new PasswordEncrypter();
-    const passwordValid = await passwordEncrypter.compare(password, user.password);
+    const passwordValid = await passwordEncrypter.compare(password, user.password!);
 
     if (!passwordValid) {
       throw new Error('Username or password incorrect');

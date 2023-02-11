@@ -1,13 +1,12 @@
 import bodyParser from 'body-parser';
+import cors from 'cors';
 import errorHandler from 'errorhandler';
 import express, { Request, Response } from 'express';
+import Router from 'express-promise-router';
 import helmet from 'helmet';
 import * as http from 'http';
 import httpStatus from 'http-status';
 import { registerRoutes } from './routes';
-import cors from 'cors';
-import Router from 'express-promise-router';
-import mongoose from 'mongoose';
 
 export class Server {
   private express: express.Express;

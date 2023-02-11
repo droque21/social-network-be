@@ -1,14 +1,21 @@
-import { Router, Request, Response } from 'express';
-import { body } from 'express-validator';
-import { validateReqSchema } from './index';
-import { UserCreateController } from '../user/infrastructure/user-create.controller';
-import { idValidation } from '../shared/infrastructure/validations/id.validation';
+import { Router } from 'express';
+import { idValidationBody, idValidationParam } from '../shared/infrastructure/validations/id.validation';
 import { emailValidation, passwordValidation, stringValidation } from '../shared/infrastructure/validations/strings.validation';
+import { UserCreateController } from '../user/infrastructure/create.controller';
+import { UserUpdateController } from '../user/infrastructure/update-controller';
+import { validateReqSchema } from './index';
 
 
 export const register = (router: Router) => {
-  const reqSchema = [
-    idValidation,
+
+  const updateRequestSchema = [
+    idValidationParam,
+    stringValidation('firstName'),
+    stringValidation('lastName'),
+  ]
+
+  const createRequestSchema = [
+    idValidationBody,
     stringValidation('firstName'),
     stringValidation('lastName'),
     stringValidation('username'),
@@ -16,7 +23,10 @@ export const register = (router: Router) => {
     emailValidation
   ];
 
-  const userCreateController = new UserCreateController();
 
-  router.post('/user', reqSchema, validateReqSchema, userCreateController.run);
+  const userCreateController = new UserCreateController();
+  const userUpdateController = new UserUpdateController();
+
+  router.post('/user', createRequestSchema, validateReqSchema, userCreateController.run);
+  router.put('/user/:id', updateRequestSchema, validateReqSchema, userUpdateController.run);
 };

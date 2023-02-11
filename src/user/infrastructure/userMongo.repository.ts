@@ -33,15 +33,22 @@ export class UserMongoRepository implements UserRepository {
     return userCreated
   }
 
-  async updateUser(user: User) {
-    const userFound = await this.findUserById(user.id);
+  async updateUser({ firstName, lastName, updatedAt, id }: User) {
+    const userFound = await this.findUserById(id!);
 
     if (!userFound) {
       throw new Error('User not found');
     }
 
-    const userUpdated = await UserModel.findOneAndUpdate({ id: user.id }, user);
-    return userUpdated!;
+    const userUpdated = userFound.set({
+      firstName,
+      lastName,
+      updatedAt
+    });
+
+    await userUpdated.save();
+
+    return userUpdated;
   }
 
   async deleteUser(id: string) {

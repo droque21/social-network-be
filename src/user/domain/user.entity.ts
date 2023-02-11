@@ -1,22 +1,22 @@
 
 export class User {
-  readonly id: string;
-  readonly username: string;
-  readonly password: string;
-  readonly email: string;
+  readonly id?: string;
+  readonly username?: string;
+  readonly password?: string;
+  readonly email?: string;
   readonly firstName: string;
   readonly lastName: string;
-  readonly createdAt: number;
+  readonly createdAt?: number;
   readonly updatedAt: number;
 
   constructor(user: {
     id: string;
-    username: string;
-    password: string;
-    email: string;
+    username?: string;
+    password?: string;
+    email?: string;
     firstName: string;
     lastName: string;
-    createdAt: number;
+    createdAt?: number;
     updatedAt: number;
   }) {
     this.id = user.id;
