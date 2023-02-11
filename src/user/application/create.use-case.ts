@@ -1,11 +1,11 @@
-import { User } from "../domain/user.entity";
+import { UserModel } from "../domain/user.interfaces";
 import { UserRepository } from "../domain/user.respository";
 
 export class UserCreator {
 
   constructor(private userRepository: UserRepository) { }
 
-  async run(user: User) {
+  async run(user: UserModel) {
     const existingUser = await this.userRepository.existsOne(user);
     if (existingUser) {
       if (existingUser.id === user.id) {

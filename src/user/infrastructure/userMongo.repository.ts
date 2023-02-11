@@ -1,4 +1,5 @@
 import { User } from "../domain/user.entity";
+import { UserInfoUpdatable } from "../domain/user.interfaces";
 import { UserRepository } from "../domain/user.respository";
 import { UserModel } from "./user.mongo";
 
@@ -33,8 +34,8 @@ export class UserMongoRepository implements UserRepository {
     return userCreated
   }
 
-  async updateUser({ firstName, lastName, updatedAt, id }: User) {
-    const userFound = await this.findUserById(id!);
+  async updateUser({ firstName, lastName, id }: UserInfoUpdatable) {
+    const userFound = await this.findUserById(id);
 
     if (!userFound) {
       throw new Error('User not found');
@@ -43,7 +44,7 @@ export class UserMongoRepository implements UserRepository {
     const userUpdated = userFound.set({
       firstName,
       lastName,
-      updatedAt
+      updatedAt: Date.now()
     });
 
     await userUpdated.save();
@@ -52,6 +53,6 @@ export class UserMongoRepository implements UserRepository {
   }
 
   async deleteUser(id: string) {
-    UserModel.findOneAndUpdate({ id }, { isActive: false })
+    await UserModel.findOneAndUpdate({ id }, { isActive: false, updatedAt: Date.now() })
   }
 }

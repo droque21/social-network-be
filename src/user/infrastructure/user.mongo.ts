@@ -1,7 +1,10 @@
 import mongoose from "mongoose";
 import { User } from "../domain/user.entity";
 
-type UserDoc = mongoose.Document & User
+type UserDoc = mongoose.Document & User & {
+	createdAt: number
+	updatedAt: number
+}
 
 interface UserModel extends mongoose.Model<UserDoc> {
 	build(user: User): UserDoc;
@@ -64,7 +67,11 @@ const userSchema = new mongoose.Schema(
 
 
 userSchema.statics.build = (user: User) => {
-	return new UserModel(user);
+	return new UserModel({
+		...user,
+		createdAt: Date.now(),
+		updatedAt: Date.now(),
+	});
 }
 
 export const UserModel = mongoose.model<UserDoc, UserModel>("User", userSchema);

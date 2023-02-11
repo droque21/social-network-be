@@ -39,8 +39,6 @@ export class UserCreateController implements Controller {
       email,
       username,
       password: passwordEncrypted,
-      createdAt: Date.now(),
-      updatedAt: Date.now(),
     })
 
     const userRepository = new UserMongoRepository();
