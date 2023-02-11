@@ -11,7 +11,7 @@ import { registerRoutes } from './routes';
 export class Server {
   private express: express.Express;
   readonly port: string;
-  httpServer?: http.Server;
+  httpServer: http.Server;
 
   constructor(port: string) {
     this.port = port;
@@ -28,6 +28,8 @@ export class Server {
     this.express.use(router);
     registerRoutes(router);
 
+    this.httpServer = http.createServer(this.express);
+
     router.use((err: Error, req: Request, res: Response, next: Function) => {
       res.status(httpStatus.INTERNAL_SERVER_ERROR).send({
         error: err.message,
@@ -38,7 +40,7 @@ export class Server {
   async listen(): Promise<void> {
 
     return new Promise(resolve => {
-      this.httpServer = this.express.listen(this.port, () => {
+      this.httpServer.listen(this.port, () => {
         console.info(
           `  Backoffice Backend App is running at http://localhost:${this.port} in ${this.express.get('env')} mode`
         );
