@@ -3,7 +3,8 @@ import mongoose from 'mongoose';
 import { Server } from './server'
 import { AppSocketIO } from './socket';
 export class App {
-  server?: Server;
+
+  private server?: Server;
 
   constructor() {
     dotenv.config()
