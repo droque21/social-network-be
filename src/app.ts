@@ -1,29 +1,38 @@
-import * as dotenv from 'dotenv'
-import mongoose from 'mongoose';
-import { Server } from './server'
-import { AppSocketIO } from './socket';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import errorHandler from 'errorhandler';
+import express, { Express, Request, Response } from 'express';
+import Router from 'express-promise-router';
+import helmet from 'helmet';
+import httpStatus from 'http-status';
+import { registerRoutes } from './routes';
+
 export class App {
+  private static app: Express;
 
-  private server?: Server;
+  static async initialize() {
+    this.app = express();
+    this.app.use(bodyParser.json());
+    this.app.use(bodyParser.urlencoded({ extended: true }));
+    this.app.use(helmet.xssFilter());
+    this.app.use(helmet.noSniff());
+    this.app.use(helmet.hidePoweredBy());
+    this.app.use(helmet.frameguard({ action: 'deny' }));
+    const router = Router();
+    router.use(cors());
+    router.use(errorHandler());
 
-  constructor() {
-    dotenv.config()
+    this.app.use(router);
+    await registerRoutes(router);
+
+    router.use((err: Error, req: Request, res: Response, next: Function) => {
+      res.status(httpStatus.INTERNAL_SERVER_ERROR).send({
+        error: err.message,
+      });
+    });
   }
 
-  async start() {
-    if (!process.env.MONGO_URI) {
-      throw new Error("MONGO_URI must be defined")
-    }
-    if (!process.env.JWT_SECRET) {
-      throw new Error("JWT_SECRET must be defined")
-    }
-
-    await mongoose.connect(process.env.MONGO_URI!);
-    console.log("Connected to MongoDB")
-
-    const port = process.env.PORT || '5001';
-    this.server = new Server(port);
-    AppSocketIO.startSocket(this.server.httpServer)
-    return this.server.listen();
+  static getApp() {
+    return this.app;
   }
 }
