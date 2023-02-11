@@ -3,7 +3,8 @@ import mongoose from 'mongoose';
 import { Server } from './server'
 import { AppSocketIO } from './socket';
 export class App {
-  server?: Server;
+
+  private server?: Server;
 
   constructor() {
     dotenv.config()
@@ -22,11 +23,7 @@ export class App {
 
     const port = process.env.PORT || '5001';
     this.server = new Server(port);
-    AppSocketIO.getSocket(this.server.httpServer)
+    AppSocketIO.startSocket(this.server.httpServer)
     return this.server.listen();
-  }
-
-  get httpServer() {
-    return this.server?.getHTTPServer();
   }
 }
