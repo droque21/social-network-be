@@ -7,7 +7,6 @@ describe('Delete User', () => {
 
   it('should have a route handler listening to /api/user/:id for delete request', async () => {
     const response = await request(App.getApp()).delete('/api/user/:id')
-    console.log(response.body, response.status)
     expect(response.status).not.toBe(404)
   })
 

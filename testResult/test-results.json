@@ -16,42 +16,42 @@
         {
           "ancestorTitles": [
             "",
-            "Delete User"
+            "Create User"
           ],
-          "fullName": " Delete User should have a route handler listening to /api/user/:id for delete request",
+          "fullName": " Create User should have a route handler listening to /api/user for post request",
           "status": "passed",
-          "title": "should have a route handler listening to /api/user/:id for delete request",
-          "duration": 29,
+          "title": "should have a route handler listening to /api/user for post request",
+          "duration": 28,
           "failureMessages": []
         },
         {
           "ancestorTitles": [
             "",
-            "Delete User"
+            "Create User"
           ],
-          "fullName": " Delete User should return a 422 status code if the id is invalid",
+          "fullName": " Create User should return a 400 status code if the request body is invalid",
           "status": "passed",
-          "title": "should return a 422 status code if the id is invalid",
-          "duration": 6,
+          "title": "should return a 400 status code if the request body is invalid",
+          "duration": 12,
           "failureMessages": []
         },
         {
           "ancestorTitles": [
             "",
-            "Delete User"
+            "Create User"
           ],
-          "fullName": " Delete User should return a 204 status code if the id is valid",
+          "fullName": " Create User should return a 201 status code if the request body is valid",
           "status": "passed",
-          "title": "should return a 204 status code if the id is valid",
-          "duration": 10,
+          "title": "should return a 201 status code if the request body is valid",
+          "duration": 81,
           "failureMessages": []
         }
       ],
-      "startTime": 1676155572505,
-      "endTime": 1676155572550,
+      "startTime": 1676156100555,
+      "endTime": 1676156100676,
       "status": "passed",
       "message": "",
-      "name": "/home/luisroque/Documents/my-projects/social-network-be/src/routes/test/user/useDelete.test.ts"
+      "name": "/home/luisroque/Documents/my-projects/social-network-be/src/routes/test/user/userCreate.test.ts"
     }
   ]
 }
