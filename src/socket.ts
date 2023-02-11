@@ -22,11 +22,11 @@ export class AppSocketIO {
     });
   }
 
-  public static getSocket(httpServer?: https.Server) {
-    if (!AppSocketIO.io && httpServer) {
-      new AppSocketIO(httpServer);
-    }
+  public static startSocket(httpServer: https.Server) {
+    new AppSocketIO(httpServer);
+  }
 
+  public static getSocket() {
     return AppSocketIO.io;
   }
 }

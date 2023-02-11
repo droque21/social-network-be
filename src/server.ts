@@ -9,12 +9,14 @@ import httpStatus from 'http-status';
 import { registerRoutes } from './routes';
 
 export class Server {
+
   private express: express.Express;
+  readonly httpServer: http.Server;
   readonly port: string;
-  httpServer: http.Server;
 
   constructor(port: string) {
     this.port = port;
+
     this.express = express();
     this.express.use(bodyParser.json());
     this.express.use(bodyParser.urlencoded({ extended: true }));
@@ -22,9 +24,11 @@ export class Server {
     this.express.use(helmet.noSniff());
     this.express.use(helmet.hidePoweredBy());
     this.express.use(helmet.frameguard({ action: 'deny' }));
+
     const router = Router();
     router.use(cors());
     router.use(errorHandler());
+
     this.express.use(router);
     registerRoutes(router);
 
@@ -38,7 +42,6 @@ export class Server {
   }
 
   async listen(): Promise<void> {
-
     return new Promise(resolve => {
       this.httpServer.listen(this.port, () => {
         console.info(
@@ -48,10 +51,6 @@ export class Server {
         resolve();
       });
     });
-  }
-
-  getHTTPServer() {
-    return this.httpServer;
   }
 
   async stop(): Promise<void> {
