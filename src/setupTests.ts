@@ -15,7 +15,7 @@ beforeAll(async () => {
   if (mongo.state === "stopped") {
     await mongo.start();
   }
-  App.initialize()
+  await App.initialize()
   const mongoUri = mongo.getUri()
   process.env.MONGO_URI = mongoUri
   await mongoose.connect(mongoUri, {})

@@ -21,12 +21,12 @@
           "fullName": " user should return the user",
           "status": "passed",
           "title": "should return the user",
-          "duration": 11,
+          "duration": 18,
           "failureMessages": []
         }
       ],
-      "startTime": 1676152513162,
-      "endTime": 1676152513173,
+      "startTime": 1676152594263,
+      "endTime": 1676152594281,
       "status": "passed",
       "message": "",
       "name": "/home/luisroque/Documents/my-projects/social-network-be/src/routes/test/user.test.ts"

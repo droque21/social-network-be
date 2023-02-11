@@ -24,7 +24,7 @@ const start = async () => {
     throw new Error("JWT_SECRET must be defined")
   }
   try {
-    App.initialize()
+    await App.initialize()
     const app = App.getApp()
     const server = new Server(app, process.env.PORT || '5001')
     AppSocketIO.startSocket(server.httpServer)
