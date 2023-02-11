@@ -22,7 +22,7 @@ export class UserDeleteController implements Controller {
     const deleteUserCase = new UserDelete(userRepository);
     await deleteUserCase.run(id);
 
-    res.status(httpStatus.OK).send({
+    res.status(httpStatus.NO_CONTENT).send({
       result: "User deleted",
     });
   }

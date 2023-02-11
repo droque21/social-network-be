@@ -30,5 +30,5 @@ export const register = (router: Router) => {
 
   router.post(baseRoute, createRequestSchema, validateReqSchema, userCreateController.run);
   router.put(`${baseRoute}/:id`, updateRequestSchema, validateReqSchema, userUpdateController.run);
-  router.delete(`${baseRoute}:id`, [idValidationParam], validateReqSchema, userDeleteController.run);
+  router.delete(`${baseRoute}/:id`, [idValidationParam], validateReqSchema, userDeleteController.run);
 };

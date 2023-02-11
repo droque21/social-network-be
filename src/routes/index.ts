@@ -4,17 +4,15 @@ import { ValidationError, validationResult } from 'express-validator';
 import httpStatus from 'http-status';
 
 export async function registerRoutes(router: Router) {
-
   const routes = glob.sync('**/*.route.ts', {
     cwd: __dirname,
   });
 
-  await Promise.all(routes.map(async route => await register(`${__dirname}/${route}`, router)));
-}
-
-async function register(routePath: string, router: Router) {
-  const route = await import(routePath);
-  route.register(router);
+  for (const route of routes) {
+    const routePath = `${__dirname}/${route}`;
+    const routeModule = await import(routePath);
+    routeModule.register(router);
+  }
 }
 
 export function validateReqSchema(req: Request, res: Response, next: Function) {

@@ -3,12 +3,12 @@
   "numPassedTestSuites": 2,
   "numFailedTestSuites": 0,
   "numPendingTestSuites": 0,
-  "numTotalTests": 1,
-  "numPassedTests": 1,
+  "numTotalTests": 3,
+  "numPassedTests": 3,
   "numFailedTests": 0,
   "numPendingTests": 0,
   "numTodoTests": 0,
-  "startTime": 1676153404862,
+  "startTime": 1676155537626,
   "success": true,
   "testResults": [
     {
@@ -16,20 +16,42 @@
         {
           "ancestorTitles": [
             "",
-            "Create User"
+            "Delete User"
           ],
-          "fullName": " Create User should have a route handler listening to /api/user for post request",
+          "fullName": " Delete User should have a route handler listening to /api/user/:id for delete request",
           "status": "passed",
-          "title": "should have a route handler listening to /api/user for post request",
+          "title": "should have a route handler listening to /api/user/:id for delete request",
           "duration": 29,
+          "failureMessages": []
+        },
+        {
+          "ancestorTitles": [
+            "",
+            "Delete User"
+          ],
+          "fullName": " Delete User should return a 422 status code if the id is invalid",
+          "status": "passed",
+          "title": "should return a 422 status code if the id is invalid",
+          "duration": 6,
+          "failureMessages": []
+        },
+        {
+          "ancestorTitles": [
+            "",
+            "Delete User"
+          ],
+          "fullName": " Delete User should return a 204 status code if the id is valid",
+          "status": "passed",
+          "title": "should return a 204 status code if the id is valid",
+          "duration": 10,
           "failureMessages": []
         }
       ],
-      "startTime": 1676153405730,
-      "endTime": 1676153405759,
+      "startTime": 1676155572505,
+      "endTime": 1676155572550,
       "status": "passed",
       "message": "",
-      "name": "/home/luisroque/Documents/my-projects/social-network-be/src/routes/test/user/create.test.ts"
+      "name": "/home/luisroque/Documents/my-projects/social-network-be/src/routes/test/user/useDelete.test.ts"
     }
   ]
 }
