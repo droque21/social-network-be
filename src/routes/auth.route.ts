@@ -5,6 +5,7 @@ import { validateReqSchema } from './index';
 
 
 export const register = (router: Router) => {
+  const baseRoute = '/api/auth';
   const reqSchema = [
     stringValidation('username'),
     stringValidation('password'),
@@ -12,5 +13,5 @@ export const register = (router: Router) => {
 
   const loginController = new AuthLoginController();
 
-  router.post('/auth', reqSchema, validateReqSchema, loginController.run);
+  router.post(baseRoute, reqSchema, validateReqSchema, loginController.run);
 };

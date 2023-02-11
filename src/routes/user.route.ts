@@ -7,7 +7,7 @@ import { UserUpdateController } from '../user/infrastructure/update-controller';
 import { validateReqSchema } from './index';
 
 export const register = (router: Router) => {
-
+  const baseRoute = '/api/user';
   const updateRequestSchema = [
     idValidationParam,
     stringValidation('firstName'),
@@ -28,7 +28,7 @@ export const register = (router: Router) => {
   const userUpdateController = new UserUpdateController();
   const userDeleteController = new UserDeleteController();
 
-  router.post('/user', createRequestSchema, validateReqSchema, userCreateController.run);
-  router.put('/user/:id', updateRequestSchema, validateReqSchema, userUpdateController.run);
-  router.delete('/user/:id', [idValidationParam], validateReqSchema, userDeleteController.run);
+  router.post(baseRoute, createRequestSchema, validateReqSchema, userCreateController.run);
+  router.put(`${baseRoute}/:id`, updateRequestSchema, validateReqSchema, userUpdateController.run);
+  router.delete(`${baseRoute}:id`, [idValidationParam], validateReqSchema, userDeleteController.run);
 };

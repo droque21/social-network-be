@@ -8,7 +8,7 @@
   "numFailedTests": 0,
   "numPendingTests": 0,
   "numTodoTests": 0,
-  "startTime": 1676152728744,
+  "startTime": 1676153404862,
   "success": true,
   "testResults": [
     {
@@ -18,15 +18,15 @@
             "",
             "Create User"
           ],
-          "fullName": " Create User should have a route /user with method post",
+          "fullName": " Create User should have a route handler listening to /api/user for post request",
           "status": "passed",
-          "title": "should have a route /user with method post",
+          "title": "should have a route handler listening to /api/user for post request",
           "duration": 29,
           "failureMessages": []
         }
       ],
-      "startTime": 1676153027898,
-      "endTime": 1676153027927,
+      "startTime": 1676153405730,
+      "endTime": 1676153405759,
       "status": "passed",
       "message": "",
       "name": "/home/luisroque/Documents/my-projects/social-network-be/src/routes/test/user/create.test.ts"

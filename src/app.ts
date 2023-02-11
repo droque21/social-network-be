@@ -21,7 +21,6 @@ export class App {
     const router = Router();
     router.use(cors());
     router.use(errorHandler());
-
     this.app.use(router);
     await registerRoutes(router);
 
