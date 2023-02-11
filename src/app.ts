@@ -1,6 +1,7 @@
 import * as dotenv from 'dotenv'
 import mongoose from 'mongoose';
 import { Server } from './server'
+import { AppSocketIO } from './socket';
 export class App {
   server?: Server;
 
@@ -21,6 +22,7 @@ export class App {
 
     const port = process.env.PORT || '5001';
     this.server = new Server(port);
+    AppSocketIO.getSocket(this.server.httpServer)
     return this.server.listen();
   }
 
