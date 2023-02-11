@@ -1,6 +1,6 @@
 # Description
 
-[Board]https://trello.com/b/llQw021j/social-network-app?filter=(YOUR_ID_HERE)
+[Board](https://trello.com/b/llQw021j/social-network-app?filter=YOUR_ID_HERE)
 
 <!-- Please include a summary of the change and which issue is fixed. Please also include relevant motivation and context. List any dependencies that are required for this change.
 Fixes # (issue) -->
