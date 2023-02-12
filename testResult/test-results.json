@@ -1,16 +1,55 @@
 {
-  "numTotalTestSuites": 1,
-  "numPassedTestSuites": 1,
+  "numTotalTestSuites": 2,
+  "numPassedTestSuites": 2,
   "numFailedTestSuites": 0,
   "numPendingTestSuites": 0,
-  "numTotalTests": 3,
-  "numPassedTests": 3,
+  "numTotalTests": 6,
+  "numPassedTests": 6,
   "numFailedTests": 0,
   "numPendingTests": 0,
   "numTodoTests": 0,
-  "startTime": 1676155537626,
+  "startTime": 1676156289648,
   "success": true,
   "testResults": [
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            ""
+          ],
+          "fullName": " should have a route handler listening to /api/user/:id for delete request",
+          "status": "passed",
+          "title": "should have a route handler listening to /api/user/:id for delete request",
+          "duration": 34,
+          "failureMessages": []
+        },
+        {
+          "ancestorTitles": [
+            ""
+          ],
+          "fullName": " should return a 422 status code if the id is invalid",
+          "status": "passed",
+          "title": "should return a 422 status code if the id is invalid",
+          "duration": 7,
+          "failureMessages": []
+        },
+        {
+          "ancestorTitles": [
+            ""
+          ],
+          "fullName": " should return a 204 status code if the id is valid",
+          "status": "passed",
+          "title": "should return a 204 status code if the id is valid",
+          "duration": 16,
+          "failureMessages": []
+        }
+      ],
+      "startTime": 1676156290541,
+      "endTime": 1676156290598,
+      "status": "passed",
+      "message": "",
+      "name": "/home/luisroque/Documents/my-projects/social-network-be/src/routes/test/user/useDelete.test.ts"
+    },
     {
       "assertionResults": [
         {
@@ -20,7 +59,7 @@
           "fullName": " should have a route handler listening to /api/user for post request",
           "status": "passed",
           "title": "should have a route handler listening to /api/user for post request",
-          "duration": 28,
+          "duration": 36,
           "failureMessages": []
         },
         {
@@ -30,7 +69,7 @@
           "fullName": " should return a 400 status code if the request body is invalid",
           "status": "passed",
           "title": "should return a 400 status code if the request body is invalid",
-          "duration": 10,
+          "duration": 17,
           "failureMessages": []
         },
         {
@@ -40,12 +79,12 @@
           "fullName": " should return a 201 status code if the request body is valid",
           "status": "passed",
           "title": "should return a 201 status code if the request body is valid",
-          "duration": 81,
+          "duration": 94,
           "failureMessages": []
         }
       ],
-      "startTime": 1676156253050,
-      "endTime": 1676156253169,
+      "startTime": 1676156290539,
+      "endTime": 1676156290686,
       "status": "passed",
       "message": "",
       "name": "/home/luisroque/Documents/my-projects/social-network-be/src/routes/test/user/userCreate.test.ts"
