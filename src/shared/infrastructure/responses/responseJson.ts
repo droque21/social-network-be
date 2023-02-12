@@ -1,5 +1,5 @@
 export interface ResponseJson {
   message: string;
-  result: any;
+  data: any;
   success: boolean;
 }

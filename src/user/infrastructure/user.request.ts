@@ -10,3 +10,13 @@ export interface UserCreateRequest extends Request {
     password: string
   };
 }
+
+export interface UserUpdateRequest extends Request {
+  body: {
+    firstName: string
+    lastName: string
+  };
+  params: {
+    id: string
+  }
+}

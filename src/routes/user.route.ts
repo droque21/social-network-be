@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { idValidationBody, idValidationParam } from '../shared/infrastructure/validations/id.validation';
 import { emailValidation, passwordValidation, stringValidation } from '../shared/infrastructure/validations/strings.validation';
 import { UserCreator } from '../user/application/create.use-case';
+import { UserUpdate } from '../user/application/update.use-case';
 import { UserCreateController } from '../user/infrastructure/create.controller';
 import { UserDeleteController } from '../user/infrastructure/delete.controller';
 import { UserUpdateController } from '../user/infrastructure/update-controller';
@@ -27,10 +28,12 @@ export const register = (router: Router) => {
   ];
 
   const userMongoRepository = new UserMongoRepository();
+
   const userCreateUseCase = new UserCreator(userMongoRepository);
+  const userUpdateUseCase = new UserUpdate(userMongoRepository);
 
   const userCreateController = new UserCreateController(userCreateUseCase);
-  const userUpdateController = new UserUpdateController();
+  const userUpdateController = new UserUpdateController(userUpdateUseCase);
   const userDeleteController = new UserDeleteController();
 
   router.post(baseRoute, createRequestSchema, validateReqSchema, userCreateController.run);

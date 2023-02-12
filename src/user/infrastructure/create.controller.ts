@@ -20,7 +20,7 @@ export class UserCreateController implements Controller {
 
     const response = new AppResponse({
       message: 'User created',
-      result: {
+      data: {
         user: userCreated,
       },
       success: true,

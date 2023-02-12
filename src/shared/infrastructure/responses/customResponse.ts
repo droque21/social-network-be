@@ -4,16 +4,16 @@ export class AppResponse implements ResponseJson {
 
   readonly message: string;
   readonly success: boolean;
-  readonly result: any;
+  readonly data: any;
 
   constructor({
     message,
     success,
-    result,
+    data,
   }: ResponseJson) {
     this.message = message;
     this.success = success;
-    this.result = result;
+    this.data = data;
   }
 
 }

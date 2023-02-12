@@ -1,20 +1,17 @@
-import { Request, Response } from 'express';
+import { Response } from 'express';
 import httpStatus from 'http-status';
 import { Controller } from '../../shared/infrastructure/controller/controller';
+import { AppResponse } from '../../shared/infrastructure/responses/customResponse';
 import { UserUpdate } from '../application/update.use-case';
-import { UserMongoRepository } from './userMongo.repository';
-
-interface UserUpdateRequest extends Request {
-  body: {
-    firstName: string
-    lastName: string
-  };
-  params: {
-    id: string
-  }
-}
+import { UserUpdateRequest } from './user.request';
 export class UserUpdateController implements Controller {
-  constructor() { }
+  private userUpdateUseCase: UserUpdate;
+
+  constructor(
+    userUpdateUseCase: UserUpdate,
+  ) {
+    this.userUpdateUseCase = userUpdateUseCase;
+  }
 
   async run(req: UserUpdateRequest, res: Response) {
 
@@ -27,18 +24,20 @@ export class UserUpdateController implements Controller {
       id
     } = req.params;
 
-    const userRepository = new UserMongoRepository();
-
-    const updateUserCase = new UserUpdate(userRepository);
-
-    const userUpdated = await updateUserCase.run({
+    const userUpdated = await this.userUpdateUseCase.run({
       id,
       firstName,
       lastName,
     });
 
-    res.status(httpStatus.OK).send({
-      user: userUpdated,
-    });
+    const response = new AppResponse({
+      message: 'User updated',
+      data: {
+        user: userUpdated,
+      },
+      success: true,
+    })
+
+    res.status(httpStatus.OK).send(response);
   }
 }
