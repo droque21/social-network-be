@@ -15,5 +15,4 @@ export class AppResponse implements ResponseJson {
     this.success = success;
     this.data = data;
   }
-
 }

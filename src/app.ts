@@ -6,6 +6,9 @@ import Router from 'express-promise-router';
 import helmet from 'helmet';
 import httpStatus from 'http-status';
 import { registerRoutes } from './routes';
+import { CustomError } from './shared/infrastructure/errors/customError';
+import { currentUser } from './shared/infrastructure/middlewares/current-user';
+import { AppResponse } from './shared/infrastructure/responses/customResponse';
 
 export class App {
   private static app: Express;
@@ -20,14 +23,31 @@ export class App {
     this.app.use(helmet.frameguard({ action: 'deny' }));
     const router = Router();
     router.use(cors());
+    router.use(currentUser)
     router.use(errorHandler());
     this.app.use(router);
     await registerRoutes(router);
 
     router.use((err: Error, req: Request, res: Response, next: Function) => {
-      res.status(httpStatus.INTERNAL_SERVER_ERROR).send({
-        error: err.message,
-      });
+
+      if (err instanceof CustomError) {
+        const response = new AppResponse({
+          message: err.message,
+          data: err.serializeErrors(),
+          success: false,
+        })
+
+        res.status(err.statusCode).send(response);
+
+        return
+      }
+
+      const response = new AppResponse({
+        message: err.message,
+        data: null,
+        success: false,
+      })
+      res.status(httpStatus.INTERNAL_SERVER_ERROR).send(response);
     });
   }
 

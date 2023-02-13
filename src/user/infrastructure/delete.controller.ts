@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import httpStatus from 'http-status';
 import { Controller } from '../../shared/infrastructure/controller/controller';
+import { AppResponse } from '../../shared/infrastructure/responses/customResponse';
 import { UserDelete } from '../application/delete.use-case';
 import { UserMongoRepository } from './userMongo.repository';
 
@@ -22,8 +23,12 @@ export class UserDeleteController implements Controller {
 
     await userDeleteUseCase.run(id);
 
-    res.status(httpStatus.NO_CONTENT).send({
-      result: "User deleted",
-    });
+    const response = new AppResponse({
+      message: 'User deleted',
+      data: null,
+      success: true,
+    })
+
+    res.status(httpStatus.NO_CONTENT).send(response);
   }
 }

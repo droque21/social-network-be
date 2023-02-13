@@ -1,8 +1,9 @@
 import { Request, Response } from "express";
+import httpStatus from "http-status";
 import { Controller } from "../../shared/infrastructure/controller/controller";
-import { JsonWebToken } from "../../shared/infrastructure/jsonWebToken/jsonWebToken";
-import { PasswordEncrypter } from "../../shared/infrastructure/passwordEncrypter/passwordEncrypter";
+import { AppResponse } from "../../shared/infrastructure/responses/customResponse";
 import { UserMongoRepository } from "../../user/infrastructure/userMongo.repository";
+import { LoginUseCase } from "../application/login.use-case";
 
 interface RequestLogin extends Request {
   body: {
@@ -10,7 +11,6 @@ interface RequestLogin extends Request {
     password: string;
   };
 }
-
 export class AuthLoginController implements Controller {
   constructor(
   ) { }
@@ -19,23 +19,17 @@ export class AuthLoginController implements Controller {
     const { username, password } = req.body;
 
     const userRepository = new UserMongoRepository();
-    const user = await userRepository.findUserByUsername(username);
+    const loginUseCase = new LoginUseCase(userRepository);
 
-    if (!user) {
-      throw new Error('Username or password incorrect');
-    }
+    const auth = await loginUseCase.run(username, password);
 
-    const passwordEncrypter = new PasswordEncrypter();
-    const passwordValid = await passwordEncrypter.compare(password, user.password!);
-
-    if (!passwordValid) {
-      throw new Error('Username or password incorrect');
-    }
-
-    const jsonWebToken = new JsonWebToken();
-
-    const auth = jsonWebToken.encrypt(user.id);
-
-    res.json({ result: auth })
+    const response = new AppResponse({
+      message: 'User logged',
+      data: {
+        auth,
+      },
+      success: true,
+    })
+    res.status(httpStatus.OK).json(response)
   }
 }

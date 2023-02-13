@@ -9,7 +9,6 @@ export class UserCreateController implements Controller {
 
   async run(req: UserCreateRequest, res: Response) {
     const user = req.body;
-
     const userMongoRepository = new UserMongoRepository();
     const createUserUseCase = new UserCreator(userMongoRepository);
 
