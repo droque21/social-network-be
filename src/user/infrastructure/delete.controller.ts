@@ -11,16 +11,16 @@ interface UserDeleteRequest extends Request {
 }
 
 export class UserDeleteController implements Controller {
-  constructor() { }
-
   async run(req: UserDeleteRequest, res: Response) {
     const {
       id
     } = req.params;
 
-    const userRepository = new UserMongoRepository();
-    const deleteUserCase = new UserDelete(userRepository);
-    await deleteUserCase.run(id);
+    const userMongoRepository = new UserMongoRepository();
+
+    const userDeleteUseCase = new UserDelete(userMongoRepository);
+
+    await userDeleteUseCase.run(id);
 
     res.status(httpStatus.NO_CONTENT).send({
       result: "User deleted",

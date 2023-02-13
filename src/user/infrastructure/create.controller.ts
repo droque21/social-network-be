@@ -4,19 +4,16 @@ import { Controller } from '../../shared/infrastructure/controller/controller';
 import { AppResponse } from '../../shared/infrastructure/responses/customResponse';
 import { UserCreator } from '../application/create.use-case';
 import { UserCreateRequest } from './user.request';
+import { UserMongoRepository } from './userMongo.repository';
 export class UserCreateController implements Controller {
-  private createUseCase: UserCreator;
-
-  constructor(
-    createUseCase: UserCreator
-  ) {
-    this.createUseCase = createUseCase;
-  }
 
   async run(req: UserCreateRequest, res: Response) {
     const user = req.body;
 
-    const userCreated = await this.createUseCase.run(user);
+    const userMongoRepository = new UserMongoRepository();
+    const createUserUseCase = new UserCreator(userMongoRepository);
+
+    const userCreated = await createUserUseCase.run(user);
 
     const response = new AppResponse({
       message: 'User created',

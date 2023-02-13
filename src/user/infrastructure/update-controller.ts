@@ -4,15 +4,8 @@ import { Controller } from '../../shared/infrastructure/controller/controller';
 import { AppResponse } from '../../shared/infrastructure/responses/customResponse';
 import { UserUpdate } from '../application/update.use-case';
 import { UserUpdateRequest } from './user.request';
+import { UserMongoRepository } from './userMongo.repository';
 export class UserUpdateController implements Controller {
-  private userUpdateUseCase: UserUpdate;
-
-  constructor(
-    userUpdateUseCase: UserUpdate,
-  ) {
-    this.userUpdateUseCase = userUpdateUseCase;
-  }
-
   async run(req: UserUpdateRequest, res: Response) {
 
     const {
@@ -24,12 +17,16 @@ export class UserUpdateController implements Controller {
       id
     } = req.params;
 
-    const userUpdated = await this.userUpdateUseCase.run({
+
+    const userMongoRepository = new UserMongoRepository();
+
+    const userUpdateUseCase = new UserUpdate(userMongoRepository);
+
+    const userUpdated = await userUpdateUseCase.run({
       id,
       firstName,
       lastName,
     });
-
     const response = new AppResponse({
       message: 'User updated',
       data: {
