@@ -30,6 +30,7 @@ export class AuthLoginController implements Controller {
       },
       success: true,
     })
+
     res.status(httpStatus.OK).json(response)
   }
 }

@@ -13,7 +13,6 @@ export class LoginUseCase {
       throw new Error('Username or password incorrect');
     }
 
-
     const passwordEncrypter = new PasswordEncrypter();
     const passwordValid = await passwordEncrypter.compare(password, user.password!);
 
@@ -21,9 +20,7 @@ export class LoginUseCase {
       throw new Error('Username or password incorrect');
     }
 
-    const jsonWebToken = new JsonWebToken();
-
-    const auth = jsonWebToken.encrypt(user.id);
+    const auth = JsonWebToken.encrypt(user.id);
 
     return auth
   }

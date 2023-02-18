@@ -6,13 +6,11 @@ import { JsonWebToken } from './shared/infrastructure/json_web_token/json-web-to
 import { generateUuid } from './shared/infrastructure/uuid/uuid';
 import request from 'supertest'
 
-process.env.JWT_SECRET = "123456"
-
 let mongo: MongoMemoryServer;
 declare global {
   var requestWithAuth: (request: request.Request) => request.Request
-  var generateUserToken: () => string
 }
+process.env.JWT_SECRET = "123456"
 
 beforeAll(async () => {
   mongo = await MongoMemoryServer.create()
@@ -39,12 +37,23 @@ afterAll(async () => {
 })
 
 global.requestWithAuth = (request: request.Request) => {
-  const token = global.generateUserToken()
+  const token = generateUserToken()
   return request.set('Authorization', 'Bearer ' + token)
 }
 
-global.generateUserToken = () => {
+const generateUserToken = () => {
   const id = generateUuid()
-  const token = new JsonWebToken().encrypt(id)
+  const token = JsonWebToken.encrypt(id)
   return token.token
 }
+
+// global.signin = () => {
+//   const id = new mongoose.Types.ObjectId().toHexString()
+//   const token = JsonWebToken.encrypt(id)
+
+//   const sessionJSON = JSON.stringify({ jwt: token })
+
+//   const base64 = Buffer.from(sessionJSON).toString("base64")
+
+//   return [`session=${base64}`]
+// }

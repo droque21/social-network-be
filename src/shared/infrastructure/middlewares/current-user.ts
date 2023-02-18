@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express"
-import { JsonWebToken } from "../json_web_token/json-web-token"
+import { JsonWebToken } from "../json_web_token"
 
 type CurretUser = { id: string }
 
@@ -18,8 +18,7 @@ export const currentUser = (req: Request, res: Response, next: NextFunction) => 
 
   try {
     const token = req.headers.authorization.split(' ')[1]
-    const jwt = new JsonWebToken()
-    const payload = jwt.decrypt(token) as CurretUser
+    const payload = JsonWebToken.decrypt(token) as CurretUser
     req.currentUser = payload
   } catch (error) {
   }

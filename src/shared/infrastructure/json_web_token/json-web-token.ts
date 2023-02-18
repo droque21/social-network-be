@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 
 export class JsonWebToken {
 
-  encrypt(id: string) {
+  static encrypt(id: string) {
     const expiresIn: string = '1h';
     const expiresInRefreshToken: string = '2d';
     const token = jwt.sign({ id }, process.env.JWT_SECRET!, { expiresIn });
@@ -14,7 +14,7 @@ export class JsonWebToken {
     };
   }
 
-  decrypt(token: string) {
+  static decrypt(token: string) {
     const tokenDecrypted = jwt.verify(token, process.env.JWT_SECRET!);
     return tokenDecrypted;
   }
