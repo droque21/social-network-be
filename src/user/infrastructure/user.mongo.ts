@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { User } from "../domain/user.entity";
+import { User } from "../domain";
 
 type UserDoc = mongoose.Document & User & {
 	createdAt: number

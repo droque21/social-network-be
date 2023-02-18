@@ -3,7 +3,7 @@ import { defineConfig } from "vitest/config";
 export default defineConfig({
   test: {
     reporters: ['json', 'default'],
-    outputFile: './testResult/test-results.json',
-    setupFiles: ['./src/setupTests.ts']
+    outputFile: './test_results/test-results.json',
+    setupFiles: ['./src/setup-tests.ts']
   }
 });

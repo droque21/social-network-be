@@ -1,10 +1,10 @@
 import { Response } from 'express';
 import httpStatus from 'http-status';
-import { Controller } from '../../shared/infrastructure/controller/controller';
-import { AppResponse } from '../../shared/infrastructure/responses/customResponse';
-import { UserCreator } from '../application/create.use-case';
-import { UserCreateRequest } from './user.request';
-import { UserMongoRepository } from './userMongo.repository';
+import { UserCreator } from '../application';
+import { UserCreateRequest } from './user-request.interfaces';
+import { UserMongoRepository } from './user-mongo.repository';
+import { Controller } from '../../shared/infrastructure/controllers';
+import { AppResponse } from '../../shared/infrastructure/responses';
 export class UserCreateController implements Controller {
 
   async run(req: UserCreateRequest, res: Response) {

@@ -1,5 +1,4 @@
-import { User } from "../domain/user.entity";
-import { UserRepository } from "../domain/user.respository";
+import { UserRepository } from "../domain";
 
 export class UserDelete {
 

@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express"
-import { JsonWebToken } from "../jsonWebToken/jsonWebToken"
+import { JsonWebToken } from "../json_web_token/json-web-token"
 
 type CurretUser = { id: string }
 

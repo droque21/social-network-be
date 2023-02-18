@@ -1,10 +1,10 @@
 import { Response } from 'express';
 import httpStatus from 'http-status';
-import { Controller } from '../../shared/infrastructure/controller/controller';
-import { AppResponse } from '../../shared/infrastructure/responses/customResponse';
-import { UserUpdate } from '../application/update.use-case';
-import { UserUpdateRequest } from './user.request';
-import { UserMongoRepository } from './userMongo.repository';
+import { UserUpdate } from '../application';
+import { UserUpdateRequest } from './user-request.interfaces';
+import { UserMongoRepository } from './user-mongo.repository';
+import { Controller } from '../../shared/infrastructure/controllers';
+import { AppResponse } from '../../shared/infrastructure/responses';
 export class UserUpdateController implements Controller {
   async run(req: UserUpdateRequest, res: Response) {
 

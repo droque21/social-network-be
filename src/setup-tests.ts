@@ -2,7 +2,7 @@ import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose from 'mongoose';
 import { afterAll, beforeAll, beforeEach, vitest } from "vitest";
 import { App } from './app';
-import { JsonWebToken } from './shared/infrastructure/jsonWebToken/jsonWebToken';
+import { JsonWebToken } from './shared/infrastructure/json_web_token/json-web-token';
 import { generateUuid } from './shared/infrastructure/uuid/uuid';
 import request from 'supertest'
 

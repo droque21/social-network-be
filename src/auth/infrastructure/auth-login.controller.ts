@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import httpStatus from "http-status";
-import { Controller } from "../../shared/infrastructure/controller/controller";
-import { AppResponse } from "../../shared/infrastructure/responses/customResponse";
-import { UserMongoRepository } from "../../user/infrastructure/userMongo.repository";
+import { Controller } from "../../shared/infrastructure/controllers/controller";
+import { AppResponse } from "../../shared/infrastructure/responses/custom-response";
+import { UserMongoRepository } from "../../user/infrastructure/user-mongo.repository";
 import { LoginUseCase } from "../application/login.use-case";
 
 interface RequestLogin extends Request {

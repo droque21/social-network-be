@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import { AuthLoginController } from '../auth/infrastructure/auth-login.controller';
-import { stringValidation } from '../shared/infrastructure/validations/strings.validation';
-import { validateReqSchema } from './index';
+import { AuthLoginController } from '../auth/infrastructure';
+import { validateReqSchema } from '../shared/infrastructure/middlewares';
+import { stringValidation } from '../shared/infrastructure/validators';
 
 
 export const register = (router: Router) => {

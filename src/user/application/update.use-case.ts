@@ -1,6 +1,4 @@
-import { UserInfoUpdatable } from "../domain/user.interfaces";
-import { UserRepository } from "../domain/user.respository";
-
+import { UserInfoUpdatable, UserRepository } from "../domain";
 export class UserUpdate {
 
   constructor(private userRepository: UserRepository) { }

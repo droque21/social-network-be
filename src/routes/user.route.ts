@@ -1,11 +1,8 @@
 import { Router } from 'express';
 import { requireAuth } from '../shared/infrastructure/middlewares/require-auth';
-import { idValidationBody, idValidationParam } from '../shared/infrastructure/validations/id.validation';
-import { emailValidation, passwordValidation, stringValidation } from '../shared/infrastructure/validations/strings.validation';
-import { UserCreateController } from '../user/infrastructure/create.controller';
-import { UserDeleteController } from '../user/infrastructure/delete.controller';
-import { UserUpdateController } from '../user/infrastructure/update-controller';
-import { validateReqSchema } from './index';
+import { UserCreateController, UserDeleteController, UserUpdateController } from '../user/infrastructure';
+import { validateReqSchema } from '../shared/infrastructure/middlewares';
+import { emailValidation, idValidationBody, idValidationParam, passwordValidation, stringValidation } from '../shared/infrastructure/validators';
 
 export const register = (router: Router) => {
   const baseRoute = '/api/user';

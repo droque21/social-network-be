@@ -1,8 +1,8 @@
 import request from 'supertest'
 import { expect, it } from 'vitest'
 import { App } from '../../../app'
-import { generateUuid } from '../../../shared/infrastructure/uuid/uuid'
-import { UserModel } from '../../../user/domain/user.interfaces'
+import { generateUuid } from '../../../shared/infrastructure/uuid'
+import { UserModel } from '../../../user/domain'
 
 it('should have a route handler listening to /api/user for post request', async () => {
   const response = await request(App.getApp()).post('/api/user')

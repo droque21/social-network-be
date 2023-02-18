@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
 import httpStatus from 'http-status';
-import { Controller } from '../../shared/infrastructure/controller/controller';
-import { AppResponse } from '../../shared/infrastructure/responses/customResponse';
-import { UserDelete } from '../application/delete.use-case';
-import { UserMongoRepository } from './userMongo.repository';
+import { Controller } from '../../shared/infrastructure/controllers';
+import { AppResponse } from '../../shared/infrastructure/responses';
+import { UserDelete } from '../application';
+import { UserMongoRepository } from './user-mongo.repository';
 
 interface UserDeleteRequest extends Request {
   params: {

@@ -1,6 +1,5 @@
 import { User } from "../domain/user.entity";
-import { UserInfoUpdatable } from "../domain/user.interfaces";
-import { UserRepository } from "../domain/user.respository";
+import { UserInfoUpdatable, UserRepository } from "../domain";
 import { UserModel } from "./user.mongo";
 
 export class UserMongoRepository implements UserRepository {

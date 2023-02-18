@@ -1,8 +1,5 @@
-import { PasswordEncrypter } from "../../shared/infrastructure/passwordEncrypter/passwordEncrypter";
-import { User } from "../domain/user.entity";
-import { UserModel } from "../domain/user.interfaces";
-import { UserRepository } from "../domain/user.respository";
-
+import { PasswordEncrypter } from "../../shared/infrastructure/password_encrypter/password-encrypter";
+import { User, UserModel, UserRepository } from "../domain";
 export class UserCreator {
 
   constructor(private userRepository: UserRepository) { }

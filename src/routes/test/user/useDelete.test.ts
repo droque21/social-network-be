@@ -1,7 +1,7 @@
 import request from 'supertest'
 import { expect, it } from 'vitest'
 import { App } from '../../../app'
-import { generateUuid } from '../../../shared/infrastructure/uuid/uuid'
+import { generateUuid } from '../../../shared/infrastructure/uuid'
 
 
 it('should have a route handler listening to /api/user/:id for delete request', async () => {

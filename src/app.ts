@@ -6,9 +6,9 @@ import Router from 'express-promise-router';
 import helmet from 'helmet';
 import httpStatus from 'http-status';
 import { registerRoutes } from './routes';
-import { CustomError } from './shared/infrastructure/errors/customError';
+import { CustomError } from './shared/infrastructure/errors/custom-error';
 import { currentUser } from './shared/infrastructure/middlewares/current-user';
-import { AppResponse } from './shared/infrastructure/responses/customResponse';
+import { AppResponse } from './shared/infrastructure/responses/custom-response';
 
 export class App {
   private static app: Express;

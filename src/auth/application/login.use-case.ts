@@ -1,5 +1,5 @@
-import { JsonWebToken } from "../../shared/infrastructure/jsonWebToken/jsonWebToken";
-import { PasswordEncrypter } from "../../shared/infrastructure/passwordEncrypter/passwordEncrypter";
+import { JsonWebToken } from "../../shared/infrastructure/json_web_token/json-web-token";
+import { PasswordEncrypter } from "../../shared/infrastructure/password_encrypter/password-encrypter";
 import { UserRepository } from "../../user/domain/user.respository";
 
 export class LoginUseCase {
