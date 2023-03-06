@@ -15,7 +15,7 @@ it('should return a 401 status code if the user is not authenticated', async () 
 })
 
 it('should return a 400 status code if the request body is invalid', async () => {
-  const response = await global.requestWithAuth(request(App.getApp()).post('/api/user')).send({})
+  const response = await request(App.getApp()).post('/api/user').set(...(await getAuthorizationHeader())).send({})
   expect(response.body.errors).toHaveLength(6)
   expect(response.status).toBe(422)
 })
@@ -23,12 +23,12 @@ it('should return a 400 status code if the request body is invalid', async () =>
 it('should return a 201 status code if the request body is valid', async () => {
   const user: UserModel = {
     id: generateUuid(),
-    firstName: 'John',
-    lastName: 'Doe',
-    email: 'email@email.com',
+    firstName: 'Johny',
+    lastName: 'Doe2',
+    email: 'email2@email.com',
     password: 'passw0Rd!',
-    username: 'username',
+    username: 'username2',
   }
-  const response = await global.requestWithAuth(request(App.getApp()).post('/api/user')).send(user)
+  const response = await request(App.getApp()).post('/api/user').set(...(await getAuthorizationHeader())).send(user)
   expect(response.status).toBe(201)
 })

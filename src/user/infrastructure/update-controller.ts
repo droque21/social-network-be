@@ -13,10 +13,7 @@ export class UserUpdateController implements Controller {
       lastName,
     } = req.body;
 
-    const {
-      id
-    } = req.params;
-
+    const { id } = req.currentUser!;
 
     const userMongoRepository = new UserMongoRepository();
 

@@ -1,4 +1,4 @@
-import { ResponseJson } from "./responseJson";
+import { ResponseJson } from "./response-json";
 
 export class AppResponse implements ResponseJson {
 

@@ -7,7 +7,6 @@ import { emailValidation, idValidationBody, idValidationParam, passwordValidatio
 export const register = (router: Router) => {
   const baseRoute = '/api/user';
   const updateRequestSchema = [
-    idValidationParam,
     stringValidation('firstName'),
     stringValidation('lastName'),
   ]
@@ -26,6 +25,6 @@ export const register = (router: Router) => {
   const userDeleteController = new UserDeleteController();
 
   router.post(baseRoute, requireAuth, createRequestSchema, validateReqSchema, userCreateController.run);
-  router.put(`${baseRoute}/:id`, updateRequestSchema, validateReqSchema, userUpdateController.run);
-  router.delete(`${baseRoute}/:id`, [idValidationParam], validateReqSchema, userDeleteController.run);
+  router.put(baseRoute, requireAuth, updateRequestSchema, validateReqSchema, userUpdateController.run);
+  router.delete(`${baseRoute}/:id`, requireAuth, [idValidationParam], validateReqSchema, userDeleteController.run);
 };

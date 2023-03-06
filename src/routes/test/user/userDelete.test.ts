@@ -10,11 +10,11 @@ it('should have a route handler listening to /api/user/:id for delete request', 
 })
 
 it('should return a 422 status code if the id is invalid', async () => {
-  const response = await request(App.getApp()).delete('/api/user/123')
+  const response = await request(App.getApp()).delete(`/api/user/1234124`).set(...(await getAuthorizationHeader()))
   expect(response.status).toBe(422)
 })
 
 it('should return a 204 status code if the id is valid', async () => {
-  const response = await request(App.getApp()).delete(`/api/user/${generateUuid()}`)
+  const response = await request(App.getApp()).delete(`/api/user/${generateUuid()}`).set(...(await getAuthorizationHeader()))
   expect(response.status).toBe(204)
 })

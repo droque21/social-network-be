@@ -5,10 +5,11 @@ import { App } from './app';
 import { JsonWebToken } from './shared/infrastructure/json_web_token/json-web-token';
 import { generateUuid } from './shared/infrastructure/uuid/uuid';
 import request from 'supertest'
+import { UserModel } from './user/infrastructure';
 
 let mongo: MongoMemoryServer;
 declare global {
-  var requestWithAuth: (request: request.Request) => request.Request
+  var getAuthorizationHeader: () => Promise<[string, string]>
 }
 process.env.JWT_SECRET = "123456"
 
@@ -20,13 +21,29 @@ beforeAll(async () => {
   await App.initialize()
   const mongoUri = mongo.getUri()
   process.env.MONGO_URI = mongoUri
-  await mongoose.connect(mongoUri, {})
+  mongoose.set('strictQuery', false)
+  await mongoose.connect(mongoUri, {
+  })
 })
 
 beforeEach(async () => {
   vitest.clearAllMocks()
   const collections = await mongoose.connection.db.collections()
   await Promise.all(collections.map(async (collection) => collection.deleteMany({})))
+
+  const users = await UserModel.find({})
+  if (users.length === 0) {
+    const id = generateUuid()
+    const user = UserModel.build({
+      id,
+      firstName: 'John',
+      lastName: 'Doe',
+      email: 'email@email.com',
+      password: '123456',
+      username: 'username',
+    })
+    await user.save()
+  }
 })
 
 afterAll(async () => {
@@ -36,24 +53,14 @@ afterAll(async () => {
   await mongoose.connection.close()
 })
 
-global.requestWithAuth = (request: request.Request) => {
-  const token = generateUserToken()
-  return request.set('Authorization', 'Bearer ' + token)
+global.getAuthorizationHeader = async () => {
+  const user = await UserModel.findOne({})
+  const id = user?.id
+  const token = generateUserToken(id)
+  return ['Authorization', 'Bearer ' + token]
 }
 
-const generateUserToken = () => {
-  const id = generateUuid()
+const generateUserToken = (id: string) => {
   const token = JsonWebToken.encrypt(id)
   return token.token
 }
-
-// global.signin = () => {
-//   const id = new mongoose.Types.ObjectId().toHexString()
-//   const token = JsonWebToken.encrypt(id)
-
-//   const sessionJSON = JSON.stringify({ jwt: token })
-
-//   const base64 = Buffer.from(sessionJSON).toString("base64")
-
-//   return [`session=${base64}`]
-// }

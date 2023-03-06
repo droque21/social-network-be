@@ -28,7 +28,10 @@ const start = async () => {
     const app = App.getApp()
     const server = new Server(app, process.env.PORT || '8080')
     AppSocketIO.startSocket(server.httpServer)
+
+    mongoose.set('strictQuery', false)
     await mongoose.connect(process.env.MONGO_URI)
+
     await server.listen()
   } catch (e) {
     handleError(e);
